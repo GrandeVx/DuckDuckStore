@@ -1,0 +1,108 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+    background: #FFFFFF;
+}
+
+.login-page {
+    width: 100%;
+    padding: 0;
+    margin: 3em auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    background: #FFFFFF;
+    width: 60%;
+    max-width: 30em;
+    min-width: 20em;
+    padding: 2.8em;
+    margin: 1em auto 8em;
+    text-align: center;
+    box-shadow: 0 0 1.25em 0 rgba(0, 0, 0, 0.2), 0 0.4em 0.4em 0 rgba(0, 0, 0, 0.24);
+    border-radius: 2%;
+    height: auto;
+}
+
+.form label {
+    font-size: 1.2em;
+    color: black;
+    font-weight: bold;
+}
+
+.form input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    border: 0;
+    margin: 0 0 1em;
+    padding: 1em;
+    font-size: 1em;
+    border-radius: 4%;
+}
+
+.form input:focus-visible {
+    outline: none;
+    box-shadow: 0 0 2px 2px #51a7e8;
+}
+
+.form button:hover, .form button:active, .form button:focus {
+    background: #003A82;
+}
+
+.form button {
+    background-color: #0056b3;
+    border: black 0.1em;
+    color: white;
+    padding: 1em 2em;
+    border-radius: 1em;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 0.25em 0.15em;
+    cursor: pointer;
+}
+
+.form .message {
+    margin: 1em 0 0;
+    color: #b3b3b3;
+    font-size: 0.75em;
+}
+
+.form .message a {
+    color: blue;
+    text-decoration: none;
+}
+
+#error {
+    color: red;
+    font-size: 0.6em;
+}
+
+@media screen and (max-width: 980px) {
+    .form {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .form {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .form {
+        width: 90%;
+    }
+}

@@ -1,0 +1,297 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 80%;
+    width: 80%;
+    margin: 0 auto;
+    padding: 2em;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Per permettere il wrapping */
+}
+
+.header h1 {
+    font-size: 2.8em;
+    color: black;
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+}
+
+.bottoni {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1em;
+}
+
+.bottoni button {
+    padding: 1em 2em;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+    border-radius: 4%;
+    transition: background-color 0.3s ease;
+    margin: 0.5em;
+    font-size: 1em;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.filtro {
+    display: flex;
+    align-items: center;
+    margin-top: 1.5em;
+    font-size: 1em;
+    flex-wrap: wrap;
+}
+
+.filtro input {
+    padding: 1em;
+    width: 30%;
+    border: 0.1em solid #ccc;
+    border-radius: 4%;
+    height: 3em;
+    font-size: 0.8em;
+    margin: 0.5em 0;
+}
+
+.stock, .prezzo, .sconto {
+    font-size: 1em;
+    color: black;
+    font-family: "Roboto", sans-serif;
+}
+
+.filtro input:focus {
+    outline: none;
+    border: 0.1em solid black;
+}
+
+.prodotto-list {
+    margin-top: 1.8em;
+}
+
+.prodotto {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1em;
+    border-bottom: 0.1em solid #0056b3;
+    flex-wrap: wrap;
+}
+
+.prodotto img {
+    width: 15em;
+    height: 15em;
+    margin-right: 2em;
+}
+
+.info-prodotto {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.nome-prodotto {
+    font-weight: bold;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.5em;
+}
+
+.delete-modify {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.modifica, .cancella {
+    padding: 0.5em 1em;
+    border: none;
+    cursor: pointer;
+    border-radius: 2%;
+    transition: background-color 0.3s ease;
+    margin: 1em;
+    font-size: 1.1em;
+    width: 8em;
+    height: 3em;
+}
+
+.modifica {
+    background-color: #007bff;
+    color: white;
+}
+
+.modifica:hover {
+    background-color: #5a6268;
+}
+
+.cancella {
+    background-color: #666666;
+    color: white;
+}
+
+@media screen and (max-width: 980px) {
+    .container {
+        width: 90%;
+        padding: 1.5em;
+    }
+
+    .header h1 {
+        font-size: 2.5em;
+    }
+
+    .bottoni button {
+        padding: 0.8em 1.5em;
+        font-size: 0.9em;
+    }
+
+    .filtro input {
+        padding: 0.8em;
+        width: 40%;
+        font-size: 0.75em;
+    }
+
+    .prodotto img {
+        width: 12em;
+        height: 12em;
+    }
+
+    .nome-prodotto {
+        font-size: 1.3em;
+    }
+
+    .prezzo, .sconto, .stock {
+        font-size: 0.9em;
+    }
+
+    .modifica, .cancella {
+        font-size: 1em;
+        width: 7em;
+        height: 2.5em;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .container {
+        width: 95%;
+        padding: 1em;
+    }
+
+    .header h1 {
+        font-size: 2em;
+    }
+
+    .bottoni button {
+        padding: 0.6em 1.2em;
+        font-size: 0.8em;
+    }
+
+    .filtro input {
+        padding: 0.6em;
+        width: 50%;
+        font-size: 0.7em;
+    }
+
+    .prodotto img {
+        width: 10em;
+        height: 10em;
+    }
+
+    .nome-prodotto {
+        font-size: 1.1em;
+    }
+
+    .prezzo, .sconto, .stock {
+        font-size: 0.8em;
+    }
+
+    .modifica, .cancella {
+        font-size: 0.9em;
+        width: 6em;
+        height: 2.2em;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .container {
+        width: 100%;
+        padding: 0.5em;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .bottoni {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .bottoni button {
+        padding: 0.5em 1em;
+        margin: 0.5em 0;
+        font-size: 0.7em;
+        width: 100%;
+    }
+
+    .filtro {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filtro input {
+        padding: 0.5em;
+        width: 100%;
+        font-size: 0.65em;
+    }
+
+    .prodotto {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .prodotto img {
+        width: 8em;
+        height: 8em;
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+
+    .info-prodotto {
+        width: 100%;
+    }
+
+    .nome-prodotto {
+        font-size: 1em;
+    }
+
+    .prezzo, .sconto, .stock {
+        font-size: 0.7em;
+    }
+
+    .modifica, .cancella {
+        font-size: 0.8em;
+        width: 100%;
+        height: 2em;
+        margin: 0.5em 0;
+    }
+}

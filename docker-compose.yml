@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_DB=ttunisa
+      - MYSQL_USER=root
+      - MYSQL_PASSWORD=mysq
+
+  db:
+    image: mysql:8.0
+    command: --init-file=/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=ttunisa
+      - MYSQL_ROOT_PASSWORD=mysq
+      - MYSQL_ROOT_HOST=%
+    volumes:
+      - ./db.sql:/docker-entrypoint-initdb.d/init.sql
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data: 

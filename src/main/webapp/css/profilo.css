@@ -1,0 +1,182 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 25em;
+    background-color: #fff;
+    padding: 1.25em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 0.6em rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    margin: 5em auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 1.25em;
+}
+
+.header h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.gruppo-form {
+    margin-bottom: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.gruppo-form label {
+    font-weight: bold;
+    margin-bottom: 0.3em;
+}
+
+.gruppo-form input {
+    padding: 0.6em;
+    border: 0.1em solid #ccc;
+    border-radius: 0.3em;
+}
+
+.gruppo-form input[type="password"] {
+    font-family: Roboto, sans-serif;
+}
+
+.saldo {
+    padding: 0.8em 1.5em;
+    font-size: 1em;
+    margin: 1em auto;
+    width: auto;
+    text-align: center;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    outline: none;
+}
+
+.saldo:focus {
+    outline: 3px solid #007bff;
+    outline-offset: 2px;
+    background-color: #45a049;
+}
+
+.saldo:hover{
+    background-color: #45a049;
+}
+
+.bottoni {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.bottoni button {
+    background-color: #007bff;
+    color: #fff;
+    padding: 0.625em 1.25em;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+}
+
+.bottoni button.cancella {
+    background-color: #ccc;
+    margin-right: 0.625em;
+}
+
+#error {
+    font-size: 0.8em;
+    text-align: center;
+    color: red;
+}
+
+@media screen and (max-width: 980px) {
+    .container {
+        padding: 1em;
+        margin: 4em auto;
+    }
+
+    .header h2 {
+        font-size: 1.4em;
+    }
+
+    .gruppo-form input {
+        padding: 0.55em;
+    }
+
+    .bottoni button {
+        padding: 0.6em 1.1em;
+    }
+
+    #error {
+        font-size: 0.7em;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .container {
+        padding: 0.9em;
+        margin: 3em auto;
+    }
+
+    .header h2 {
+        font-size: 1.3em;
+    }
+
+    .gruppo-form input {
+        padding: 0.5em;
+    }
+
+    .bottoni button {
+        padding: 0.55em 1em;
+    }
+
+    #error {
+        font-size: 0.65em;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .container {
+        padding: 0.75em;
+        margin: 2em auto;
+    }
+
+    .header h2 {
+        font-size: 1.2em;
+    }
+
+    .gruppo-form input {
+        padding: 0.45em;
+    }
+
+    .bottoni button {
+        padding: 0.5em 0.9em;
+    }
+
+    .bottoni {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .bottoni button.cancella {
+        margin-right: 0;
+        margin-bottom: 0.625em;
+    }
+
+    #error {
+        font-size: 0.6em;
+    }
+}

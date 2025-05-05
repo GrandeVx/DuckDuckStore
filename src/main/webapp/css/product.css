@@ -1,0 +1,264 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+}
+
+.product-page {
+    width: 90%;
+    padding: 2em;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+    text-align: center;
+}
+
+.infos {
+    margin-bottom: 1.5em;
+    font-size: 1.2em;
+    color: #666;
+}
+
+.product-container {
+    display: flex;
+    align-items: center;
+    margin-top: 2em;
+    line-height: 0.2em;
+}
+
+.product-image {
+    text-align: center;
+    margin-right: 2em;
+}
+
+.product-image img {
+    border: 0.1em solid #0056b3;
+    padding: 0.5em;
+    width: 20em;
+    height: 20em;
+}
+
+.product-details {
+    padding: 1.5em;
+    background-color: white;
+    flex: 1;
+    text-align: left;
+}
+
+.product-nome {
+    display: block;
+    word-wrap: break-word;
+    text-align: left;
+    margin-bottom: 1em
+}
+
+.product-nome h1 {
+    font-size: 2em;
+
+    margin:0 ;
+    word-wrap: break-word;
+    flex-wrap: wrap;
+    white-space: normal;
+    line-height: 1.2em;
+}
+
+.price {
+    margin-bottom: 2em;
+}
+
+.barred-prezzo {
+    font-size: 1.5em;
+    color: grey;
+    text-decoration: line-through;
+    padding-bottom: 0.5em;
+}
+
+.prezzo {
+    font-size: 2em;
+    color: #000;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
+label {
+    margin-bottom: 0.5em;
+    font-weight: bold;
+}
+
+input[type="number"] {
+    font-family: Arial, sans-serif;
+    outline: none;
+    font-size: 1.2em;
+    width: 40%;
+    height: 3em;
+    padding: 0.5em;
+    margin: 1em 0;
+    border: #666666 0.1em solid;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+input[type="number"]:focus {
+    border: 0.1em solid black;
+    outline: none;
+    width: 5em;
+}
+
+button {
+    padding: 1em 2em;
+    background-color: #007bff;
+    font-size: 1.2em;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 1em;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.non-disponibile {
+    font-size: 1.2em;
+    color: #CA0000;
+    font-family: "Roboto", sans-serif;
+    padding: 0.1em;
+}
+
+.descrizione {
+    font-size: 0.8em;
+    color: grey;
+    font-family: Arial, sans-serif;
+    padding: 0.2em;
+}
+
+label {
+    font-size: 1.2em;
+    color: black;
+}
+
+@media screen and (max-width: 980px) {
+
+    .product-page {
+        width: 90%;
+        padding: 1.5em;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 7em;
+    }
+
+    .product-container {
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+    }
+
+    .product-image {
+        margin-right: 0;
+        margin-bottom: 1em;
+    }
+
+    .product-details {
+        text-align: left;
+    }
+
+    .product-details h1 {
+        font-size: 1.8em;
+        word-wrap: normal;
+    }
+
+    .price {
+        margin-bottom: 1.5em;
+    }
+
+    input[type="number"] {
+        width: 4em;
+    }
+
+    button {
+        padding: 0.8em 1.5em;
+        font-size: 1em;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .infos {
+        font-size: 1em;
+    }
+
+    .product-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .product-details {
+        text-align: center;
+    }
+
+    .product-details h1 {
+        margin: 0;
+        margin-bottom: 0.5em;
+        padding: 0.2em;
+    }
+
+    .barred-prezzo, .prezzo {
+        font-size: 1.5em;
+        margin: 0.6em;
+    }
+
+    input[type="number"] {
+        width: 80%;
+    }
+
+    button {
+        padding: 0.6em 1.2em;
+        font-size: 0.9em;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .product-page {
+        width: 100%;
+        padding: 1em;
+    }
+
+    .infos {
+        font-size: 0.9em;
+    }
+
+    .product-image img {
+        width: 15em;
+        height: 15em;
+    }
+
+    .product-details h1 {
+        margin-bottom: 0.5em;
+        padding: 0.2em;
+        font-size: 1.6em;
+    }
+
+    .barred-prezzo, .prezzo {
+        font-size: 1.2em;
+        margin: 0.6em;
+    }
+
+    input[type="number"] {
+        width: 100%;
+    }
+
+    button {
+        padding: 0.5em 1em;
+        font-size: 0.8em;
+    }
+}

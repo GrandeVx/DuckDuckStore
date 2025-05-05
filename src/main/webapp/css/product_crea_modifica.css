@@ -1,0 +1,209 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.back {
+    padding: 1em;
+    margin: 2em 0 0.5em 4em;
+    background-color: #5a6268;
+    color: white;
+    border: solid 0.1em black;
+    text-align: center;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.back:hover {
+    background-color: #666666;
+}
+
+.tag, .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    border-top: dashed 0.2em black;
+    border-bottom: dashed 0.2em black;
+}
+
+.detail {
+    flex: 1 1 calc(50% - 1em);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1em;
+    font-family: "Roboto", sans-serif;
+}
+
+.detail label {
+    padding: 0.5em 0;
+    font-size: 1em;
+    font-style: italic;
+    color: #CA0000;
+}
+
+.detail input,
+.detail select,
+.detail textarea {
+    padding: 0.5em;
+    font-family: Arial, sans-serif;
+    font-size: 1em;
+    border: solid 0.1em grey;
+}
+
+.detail input:focus,
+.detail select:focus,
+.detail textarea:focus {
+    border: solid 0.1em black;
+    outline: none;
+}
+
+.detail input[type="text"],
+.detail select,
+.detail textarea {
+    width: 20em;
+}
+
+.detail input[type="number"] {
+    width: 10em;
+}
+
+#submit {
+    padding: 0.8em 1.5em;
+    font-size: 1em;
+    margin: 1em auto;
+    width: auto;
+    text-align: center;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#submit:hover {
+    background-color: #45a049;
+}
+
+.immagine {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 1em auto;
+}
+
+.immagine img {
+    width: 30em;
+    height: 30em;
+    margin: 1em auto;
+}
+
+.immagine input {
+    width: 10em;
+    padding: 0.5em;
+    font-size: 1em;
+    border: solid 0.1em grey;
+}
+
+.immagine input:focus {
+    border: solid 0.1em black;
+    outline: none;
+}
+
+@media screen and (max-width: 980px) {
+    .back {
+        margin: 2em 0 0.5em 2em;
+        font-size: 1em;
+    }
+
+    .detail input[type="text"],
+    .detail select,
+    .detail textarea {
+        width: 18em;
+    }
+
+    .detail input[type="number"] {
+        width: 8em;
+    }
+
+    .immagine img {
+        width: 18em;
+        height: 18em;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .back {
+        margin: 1.5em 0 0.5em 1.5em;
+        font-size: 0.9em;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .detail {
+        width: 100%;
+    }
+
+    .detail input[type="text"],
+    .detail select,
+    .detail textarea {
+        width: 15em;
+    }
+
+    .detail input[type="number"] {
+        width: 7em;
+    }
+
+    .immagine img {
+        width: 20em;
+        height: 20em;
+    }
+}
+
+@media screen and (max-width: 540px) {
+    .back {
+        margin: 1em 0 0.5em 1em;
+        font-size: 0.8em;
+    }
+
+    .detail label {
+        font-size: 0.9em;
+    }
+
+    .detail input[type="text"],
+    .detail select,
+    .detail textarea {
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    .detail input[type="number"] {
+        width: 100%;
+        font-size: 0.9em;
+    }
+
+    .immagine img {
+        width: 20em;
+        height: 20em;
+    }
+
+    .immagine input {
+        width: 8em;
+    }
+}
