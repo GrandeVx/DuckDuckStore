@@ -64,14 +64,14 @@
                     <img src="<%= p.getImg() %>" alt="Immagine Prodotto">
                     <div class="product-details">
                         <p class="nome"><%= p.getNome() %></p>
-                        <p class="prezzo">$ <%= String.format("%.2f", prezzo) %></p>
+                        <p class="prezzo">&euro; <%= String.format("%.2f", prezzo) %></p>
                     </div>
                 </div>
 
                 <label for="quantity_<%= p.getID() %>" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Quantità prodotto <%= p.getNome() %></label>
                 <input class="quantita" type="number" id="quantity_<%= p.getID() %>" name="quantity_<%= p.getID() %>" min="1" max="99"
                        value="<%= p.getQuantita() %>" onchange="updateQuantity(this, <%= p.getID() %>, <%= prezzo %>)">
-                <p class="prezzo_totale">$ <%= String.format("%.2f", prezzoTotale) %></p>
+                <p class="prezzo_totale">&euro; <%= String.format("%.2f", prezzoTotale) %></p>
 
                 <label for="delete_<%= p.getID() %>" style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;">Cancella prodotto <%= p.getNome() %></label>
                 <button type="button" class="bidone" id="delete_<%= p.getID() %>" onclick="window.location.href ='cart?action=removeitem&ID=<%= p.getID() %>'">
@@ -85,9 +85,9 @@
         <div class="cart_pieno_check">
             <h3>Riepilogo ordine</h3>
             <div class="summary">
-                <p>Subtotale <span id="subtotale">$ <%= String.format("%.2f", subtotale) %></span></p>
-                <p>Iva <span id="iva">$ <%= String.format("%.2f", iva) %></span></p>
-                <p>Totale <span id="totale">$ <%= String.format("%.2f", totale) %></span></p>
+                <p>Subtotale <span id="subtotale">&euro; <%= String.format("%.2f", subtotale) %></span></p>
+                <p>Iva <span id="iva">&euro; <%= String.format("%.2f", iva) %></span></p>
+                <p>Totale <span id="totale">&euro; <%= String.format("%.2f", totale) %></span></p>
             </div>
             <%
                 if (isUtenteAutenticato) {
@@ -129,7 +129,7 @@
         var quantita = parseInt(input.value, 10);
         var prezzoTotale = quantita * prezzo;
         var totalPriceElement = input.closest('.prodotto').querySelector('.prezzo_totale');
-        totalPriceElement.textContent = '$ ' + prezzoTotale.toFixed(2);
+        totalPriceElement.textContent = '&euro; ' + prezzoTotale.toFixed(2);
     }
 
     function recalculateTotals() {
@@ -137,7 +137,7 @@
         var subtotale = 0.0;
 
         listaProdottiCarrello.forEach(function (item) {
-            var prezzoUnitario = parseFloat(item.querySelector('.prezzo').textContent.replace('$ ', ''));
+            var prezzoUnitario = parseFloat(item.querySelector('.prezzo').textContent.replace('&euro; ', ''));
             var quantitaProdotto = parseInt(item.querySelector('.quantita').value, 10);
             var prezzoTotaleProdotto = prezzoUnitario * quantitaProdotto;
             subtotale += prezzoTotaleProdotto;
@@ -146,9 +146,9 @@
         var iva = subtotale * 0.22;
         var totale = subtotale + iva;
 
-        document.getElementById('subtotale').textContent = '$ ' + subtotale.toFixed(2);
-        document.getElementById('iva').textContent = '$ ' + iva.toFixed(2);
-        document.getElementById('totale').textContent = '$ ' + totale.toFixed(2);
+        document.getElementById('subtotale').textContent = '&euro; ' + subtotale.toFixed(2);
+        document.getElementById('iva').textContent = '&euro; ' + iva.toFixed(2);
+        document.getElementById('totale').textContent = '&euro; ' + totale.toFixed(2);
     }
 
     function updateCartIconCount(productID) {

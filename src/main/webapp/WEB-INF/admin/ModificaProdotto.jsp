@@ -27,7 +27,7 @@
                 </div>
                 <div class="detail">
                     <label for="prezzo">Prezzo</label>
-                    <input type="number" placeholder="Prezzo $" name="Prezzo" id="prezzo" step="0.01"
+                    <input type="number" placeholder="Prezzo &euro;" name="Prezzo" id="prezzo" step="0.01"
                            value="${prodotto.prezzo}" required>
                 </div>
             </div>
@@ -46,11 +46,10 @@
                     <label for="categoria">Categoria</label>
                     <select placeholder="Categoria" name="Categoria" id="categoria" required>
                         <option value="${prodotto.categoria}">${prodotto.categoria}</option>
-                        <option value="racchette">racchette</option>
-                        <option value="tavoli">tavoli</option>
-                        <option value="palline">palline</option>
-                        <option value="abbigliamento">abbigliamento</option>
-                        <option value="altro">altro</option>
+                        <option value="spaventose">spaventose</option>
+                        <option value="natale">natale</option>
+                        <option value="fantasy">fantasy</option>
+                        <option value="professioni">professioni</option>
                     </select>
                 </div>
             </div>

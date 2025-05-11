@@ -28,13 +28,13 @@
             <div class="price">
                 <c:choose>
                     <c:when test="${prodotto.sconto == 0}">
-                        <span class="prezzo">$<fmt:formatNumber value="${prodotto.prezzo}" type="currency"
+                        <span class="prezzo">&euro;<fmt:formatNumber value="${prodotto.prezzo}" type="currency"
                                                                 pattern="0.00"/></span>
                     </c:when>
                     <c:otherwise>
-                        <p class="barred-prezzo">$<fmt:formatNumber value="${prodotto.prezzo}" type="currency"
+                        <p class="barred-prezzo">&euro;<fmt:formatNumber value="${prodotto.prezzo}" type="currency"
                                                                     pattern="0.00"/></p>
-                        <span class="prezzo">$<fmt:formatNumber
+                        <span class="prezzo">&euro;<fmt:formatNumber
                                 value="${prodotto.prezzo - (prodotto.prezzo / 100 * prodotto.sconto)}"
                                 pattern="0.00"/></span>
                     </c:otherwise>

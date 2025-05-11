@@ -34,13 +34,13 @@
                         <p class="nome">${prodotto.nome}</p>
                         <c:choose>
                             <c:when test="${prodotto.sconto == 0}">
-                                <strong class="prezzo">$<fmt:formatNumber value="${prodotto.prezzo}"
+                                <strong class="prezzo">&euro;<fmt:formatNumber value="${prodotto.prezzo}"
                                                                           pattern="0.00"/></strong>
                             </c:when>
                             <c:otherwise>
-                                <p class="barred-prezzo">$<fmt:formatNumber value="${prodotto.prezzo}"
+                                <p class="barred-prezzo">&euro;<fmt:formatNumber value="${prodotto.prezzo}"
                                                                             pattern="0.00"/></p>
-                                <strong class="prezzo">$<fmt:formatNumber
+                                <strong class="prezzo">&euro;<fmt:formatNumber
                                         value="${prodotto.prezzo - (prodotto.prezzo / 100 * prodotto.sconto)}"
                                         pattern="0.00"/></strong>
                             </c:otherwise>
@@ -64,13 +64,13 @@
                         <p class="nome">${prodotto.nome}</p>
                         <c:choose>
                             <c:when test="${prodotto.sconto == 0}">
-                                <strong class="prezzo">$<fmt:formatNumber value="${prodotto.prezzo}"
+                                <strong class="prezzo">&euro;<fmt:formatNumber value="${prodotto.prezzo}"
                                                                           pattern="0.00"/></strong>
                             </c:when>
                             <c:otherwise>
-                                <p class="barred-prezzo">$<fmt:formatNumber value="${prodotto.prezzo}"
+                                <p class="barred-prezzo">&euro;<fmt:formatNumber value="${prodotto.prezzo}"
                                                                             pattern="0.00"/></p>
-                                <strong class="prezzo">$<fmt:formatNumber
+                                <strong class="prezzo">&euro;<fmt:formatNumber
                                         value="${prodotto.prezzo - (prodotto.prezzo / 100 * prodotto.sconto)}"
                                         pattern="0.00"/></strong>
                             </c:otherwise>

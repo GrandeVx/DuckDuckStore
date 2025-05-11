@@ -18,14 +18,13 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        // Recupera prodotti più venduti e prodotti scontati
         ArrayList<Prodotto> listaProdottiVenduti = ProdottoDAO.doRetrieveOrderByAcquisti();
         request.setAttribute("listaProdottiVenduti", listaProdottiVenduti);
-        ArrayList<Prodotto> listaProdottiScontati = ProdottoDAO.doRetriveProdottoScontato();
+        ArrayList<Prodotto> listaProdottiScontati = ProdottoDAO.doRetrieveProdottoScontato();
         request.setAttribute("listaProdottiScontati", listaProdottiScontati);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/HomePage.jsp");
         dispatcher.forward(request, response);
-
     }
 
     @Override

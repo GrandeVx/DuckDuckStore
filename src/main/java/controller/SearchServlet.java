@@ -26,21 +26,23 @@ public class SearchServlet extends HttpServlet {
 
             if (query == null || query.isEmpty()) {
                 //RESTITUISCE TUTTI I PRODOTTI
-                ArrayList<Prodotto> prodotti = ProdottoDAO.doRetriveProdotto();
+                ArrayList<Prodotto> prodotti = ProdottoDAO.doRetrieveProdotto();
                 request.setAttribute("query", "Tutti i prodotti");
                 request.setAttribute("listaProdotti", prodotti);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
                 dispatcher.forward(request, response);
+                return;
 
             } else {
                 //RICERCA PER QUERY
                 if (query.equals("offerte")) {
                     //RESTITUISCE I PRODOTTI SCONTATI
-                    ArrayList<Prodotto> prodotti = ProdottoDAO.doRetriveProdottoScontato();
+                    ArrayList<Prodotto> prodotti = ProdottoDAO.doRetrieveProdottoScontato();
                     request.setAttribute("query", "Offerte");
                     request.setAttribute("listaProdotti", prodotti);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
                     dispatcher.forward(request, response);
+                    return;
 
                 } else {
                     //QUERY STANDARD
@@ -49,6 +51,7 @@ public class SearchServlet extends HttpServlet {
                     request.setAttribute("listaProdotti", prodotti);
                     RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
                     dispatcher.forward(request, response);
+                    return;
                 }
             }
         } else {
@@ -58,6 +61,7 @@ public class SearchServlet extends HttpServlet {
             request.setAttribute("listaProdotti", prodotti);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
             dispatcher.forward(request, response);
+            return;
 
         }
     }

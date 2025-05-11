@@ -10,7 +10,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.json.JSONObject;
 
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -21,44 +20,35 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        Utente u = UtenteDAO.doLogin(request.getParameter("Email"), request.getParameter("Password"));
-        String flag = request.getParameter("flag");
-        if (request.getParameter("action") == null) {
-
-            //Verifica se l'utente è loggato
+        String action = request.getParameter("action");
+        if (action == null) {
+            String email = request.getParameter("Email");
+            String password = request.getParameter("Password");
+            String flag = request.getParameter("flag");
+            Utente u = UtenteDAO.doLogin(email, password);
             if (u == null) {
                 if (flag == null) {
-                    //dati form nulli
                     RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/results/Login.jsp");
                     rs.forward(request, response);
-
-                } else if (flag.equals("true")) {
-                    //dati form errorati
+                } else if ("true".equals(flag)) {
                     request.setAttribute("errore", "Email o Password errati");
                     RequestDispatcher rs = request.getRequestDispatcher("/WEB-INF/results/Login.jsp");
                     rs.forward(request, response);
                 }
-
-            } else if (u != null) {
-                //l'utente è loggato correttamente
-                if (!u.isAmministratore()) {
-                    session.setAttribute("Utente", u); // Salva l'oggetto Utente nella sessione
-                    request.getSession();
-                    response.sendRedirect(request.getContextPath());
-
-                } else if (u.isAmministratore()) {
-                    session.setAttribute("Utente", u); // Salva l'oggetto Utente amministratore nella sessione
+            } else {
+                session.setAttribute("Utente", u);
+                if (u.isAmministratore()) {
                     session.setAttribute("isAdmin", true);
-                    response.sendRedirect(request.getContextPath());
-
+                } else {
+                    session.removeAttribute("isAdmin");
                 }
+                response.sendRedirect(request.getContextPath());
             }
-        } else if (request.getParameter("action").equals("logout")) {
+        } else if ("logout".equals(action)) {
             session.invalidate();
             response.sendRedirect(request.getContextPath());
         }
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

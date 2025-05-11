@@ -20,24 +20,37 @@ public class UpdateProfilo extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession session = request.getSession();
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+
         Utente u = (Utente) session.getAttribute("Utente");
+        if (u == null) {
+            response.sendRedirect(request.getContextPath());
+            return;
+        }
+
         String action = request.getParameter("action");
 
-        if (action != null && action.equals("newsaldo")) {
+        if ("newsaldo".equals(action)) {
             UtenteDAO.updateSaldo(u, 1000);
             u.setSaldo(1000.0);
         } else {
+            String nome = request.getParameter("firstName");
+            String cognome = request.getParameter("lastName");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
 
-            u.setNome(request.getParameter("firstName"));
-            u.setCognome(request.getParameter("lastName"));
-            u.setEmail(request.getParameter("email"));
-            if (request.getParameter("password") != null && !request.getParameter("password").isEmpty())
-                u.setPassword(Utilities.toHash(request.getParameter("password")));
+            if (nome != null && !nome.isEmpty()) u.setNome(nome);
+            if (cognome != null && !cognome.isEmpty()) u.setCognome(cognome);
+            if (email != null && !email.isEmpty()) u.setEmail(email);
+            if (password != null && !password.isEmpty())
+                u.setPassword(Utilities.toHash(password));
 
             UtenteDAO.updateUser(u);
         }
-
 
         response.sendRedirect(request.getContextPath());
     }

@@ -20,16 +20,18 @@ public class StoricoOrdiniServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        Utente utenteAttuale = (Utente) session.getAttribute("Utente");
-        if (utenteAttuale != null) {
-            ArrayList<Ordine> ordini = OrdineDAO.doRetriveOrdine(utenteAttuale.getID());
-            request.setAttribute("listaOrdini", ordini);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/StoricoOrdini.jsp");
-            dispatcher.forward(request, response);
-        } else
-            response.sendRedirect(request.getContextPath());
-
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Utente utenteAttuale = (Utente) session.getAttribute("Utente");
+            if (utenteAttuale != null) {
+                ArrayList<Ordine> ordini = OrdineDAO.doRetrieveOrdine(utenteAttuale.getID());
+                request.setAttribute("listaOrdini", ordini);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/StoricoOrdini.jsp");
+                dispatcher.forward(request, response);
+                return;
+            }
+        }
+        response.sendRedirect(request.getContextPath());
     }
 
     @Override

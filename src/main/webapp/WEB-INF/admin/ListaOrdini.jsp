@@ -2,22 +2,48 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders</title>
+    <title>Gestione Ordini</title>
     <link href="css/ordini.css" type="text/css" rel="stylesheet">
 </head>
 <body>
-<%@ include file="header.jsp" %>
-<%@ include file="nav.jsp" %>
+<%@ include file="/WEB-INF/results/header.jsp" %>
+<%@ include file="/WEB-INF/results/nav.jsp" %>
 <div class="container">
-    <h3>Ordini</h3>
-    <c:forEach var="ordine" items="${requestScope.listaOrdini}">
+    <h2>Gestione Ordini</h2>
+    <form method="get" action="admin">
+        <input type="hidden" name="action" value="ordini" />
+        <label for="utente_ID">Cliente:</label>
+        <select name="utente_ID" id="utente_ID">
+            <option value="">Tutti</option>
+            <c:forEach var="utente" items="${listaUtenti}">
+                <option value="${utente.ID}" ${param.utente_ID == utente.ID ? 'selected' : ''}>
+                    ${utente.nome} ${utente.cognome} (${utente.email})
+                </option>
+            </c:forEach>
+        </select>
+        <label for="from">Dal:</label>
+        <input type="date" name="from" id="from" value="${param.from}" />
+        <label for="to">Al:</label>
+        <input type="date" name="to" id="to" value="${param.to}" />
+        <button type="submit">Filtra</button>
+    </form>
+    <hr/>
+    <c:if test="${empty listaOrdini}">
+        <p>Nessun ordine trovato.</p>
+    </c:if>
+    <c:forEach var="ordine" items="${listaOrdini}">
         <div class="ordine">
             <div class="ordine-header">
                 <p>Codice Ordine : #${ordine.ordine_ID}</p>
+                <p>Cliente: <c:forEach var="utente" items="${listaUtenti}">
+                    <c:if test="${utente.ID == ordine.utente_ID}">
+                        ${utente.nome} ${utente.cognome} (${utente.email})
+                    </c:if>
+                </c:forEach></p>
             </div>
             <div class="dettagli-ordine">
                 <div>

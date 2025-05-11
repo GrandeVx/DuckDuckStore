@@ -19,16 +19,6 @@ body {
     height: auto;
 }
 
-.logo {
-    width: 20%;
-    height: 100%;
-}
-
-.logo img {
-    width: 80%;
-    height: auto;
-}
-
 .search-bar-infos {
     flex-grow: 1;
     display: flex;

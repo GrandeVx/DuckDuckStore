@@ -1,17 +1,14 @@
 package model;
 
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-
 import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.ArrayList;
 
-@WebServlet(name = "UtenteDAO", value = "/UtenteDAO")
-public class UtenteDAO extends HttpServlet {
+public class UtenteDAO {
 
-    public static ArrayList<Utente> doRetriveUtente() {
-        ArrayList<Utente> u = new ArrayList<Utente>();
+    // Corretto il nome del metodo per coerenza
+    public static ArrayList<Utente> doRetrieveUtente() {
+        ArrayList<Utente> u = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
             PreparedStatement ps = con.prepareStatement("SELECT * FROM utente");
             ResultSet rs = ps.executeQuery();
@@ -28,7 +25,7 @@ public class UtenteDAO extends HttpServlet {
             }
             return u;
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Errore durante il recupero degli utenti.", e);
         }
     }
 

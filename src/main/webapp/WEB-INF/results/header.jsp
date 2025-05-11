@@ -10,7 +10,7 @@
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TT Saturn</title>
+    <title>DuckDuckStore</title>
     <link rel="stylesheet" href="css\header.css">
 </head>
 <%
@@ -22,7 +22,7 @@
 <div class="header">
     <div class="logo">
         <a href="<%=request.getContextPath()%>">
-            <img src="images/logo.png" alt="TT Saturn Logo">
+            <img src="images/logo.png" alt="Logo DuckDuckStore" width="115" height="115">
         </a>
     </div>
     <div class="search-bar-infos">
@@ -43,7 +43,7 @@
                     <img src="images/user-icon2.png" alt="Utente">
                     <div class="utente-info">
                         <span class="utente-nome"><%= utente.getNome() + " " + utente.getCognome()%></span>
-                        <span class="utente-saldo">$ <%=String.format("%.2f", utente.getSaldo())%></span>
+                        <span class="utente-saldo">&euro; <%=String.format("%.2f", utente.getSaldo())%></span>
                     </div>
                 </a>
                 <div class="dropdown-content">
@@ -52,6 +52,7 @@
                     <% if (session != null && session.getAttribute("isAdmin") != null) {%>
                     <a href="admin?action=prodotti">Gestione Prodotti</a>
                     <a href="admin?action=utenti">Gestione Utenti</a>
+                    <a href="admin?action=ordini">Gestione Ordini</a>
                     <%}%>
                     <a href="login?action=logout">Logout</a>
                 </div>

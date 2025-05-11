@@ -34,12 +34,12 @@
         <p class="nome"><%=p.getNome()%>
         </p>
         <% if (p.getSconto() == 0) {%>
-        <p class="prezzo">$<%=String.format("%.2f", p.getPrezzo())%>
+        <p class="prezzo">&euro;<%=String.format("%.2f", p.getPrezzo())%>
         </p>
         <%} else {%>
-        <p class="barred-prezzo">$<%=String.format("%.2f", p.getPrezzo())%>
+        <p class="barred-prezzo">&euro;<%=String.format("%.2f", p.getPrezzo())%>
         </p>
-        <p class="prezzo">$<%=String.format("%.2f", p.getPrezzo() - (p.getPrezzo() / 100 * p.getSconto()))%>
+        <p class="prezzo">&euro;<%=String.format("%.2f", p.getPrezzo() - (p.getPrezzo() / 100 * p.getSconto()))%>
         </p>
         <%}%>
     </div>

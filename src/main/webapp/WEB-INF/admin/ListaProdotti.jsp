@@ -32,7 +32,7 @@
                     <p class="stock">Quantita' : ${p.quantita}</p>
                 </div>
                 <div class="prezzo-sconto">
-                    <p class="prezzo">Prezzo: $<c:out value="${p.prezzo}"/></p>
+                    <p class="prezzo">Prezzo: &euro;<c:out value="${p.prezzo}"/></p>
                     <p class="sconto">Sconto: ${p.sconto}%</p>
                 </div>
                 <div class="delete-modify">
@@ -90,7 +90,7 @@
                     <p class="stock">Quantita' : `+item.quantita+`</p>
                 </div>
                 <div class="prezzo-sconto">
-                    <p class="prezzo">Prezzo: $`+item.prezzo+`</p>
+                    <p class="prezzo">Prezzo: &euro;`+item.prezzo+`</p>
                     <p class="sconto">Sconto: `+item.sconto+`%</p>
                 </div>
                 <div class="delete-modify">

@@ -46,10 +46,10 @@ public class RegistrationServlet extends HttpServlet {
             request.setAttribute("errore", "Email già presente.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Registration.jsp");
             dispatcher.forward(request, response);
-        } else {
-            UtenteDAO.doRegistration(u);
-            response.sendRedirect(request.getContextPath() + "/login");
+            return;
         }
+        UtenteDAO.doRegistration(u);
+        response.sendRedirect(request.getContextPath() + "/login");
     }
 
     @Override

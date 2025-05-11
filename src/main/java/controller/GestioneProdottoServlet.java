@@ -24,26 +24,31 @@ public class GestioneProdottoServlet extends HttpServlet {
         if (action == null || action.isEmpty() || action.equals("add")) {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/CreaProdotto.jsp");
             dispatcher.forward(request, response);
+            return;
         }
 
         if (action.equals("modify")) {
-            int ID = Integer.parseInt(request.getParameter("ID"));
-            Prodotto p = ProdottoDAO.findProduct(ID);
-            request.setAttribute("prodotto", p);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/ModificaProdotto.jsp");
-            dispatcher.forward(request, response);
+            try {
+                int ID = Integer.parseInt(request.getParameter("ID"));
+                Prodotto p = ProdottoDAO.findProduct(ID);
+                request.setAttribute("prodotto", p);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/admin/ModificaProdotto.jsp");
+                dispatcher.forward(request, response);
+            } catch (NumberFormatException e) {
+                response.sendRedirect(request.getContextPath() + "/admin?action=prodotti");
+            }
+            return;
         }
 
         if (action.equals("delete")) {
-            //CANCELLA PRODOTTO
-            int ID = Integer.parseInt(request.getParameter("ID"));
-            ProdottoDAO.deleteProdotto(ID);
+            try {
+                int ID = Integer.parseInt(request.getParameter("ID"));
+                ProdottoDAO.deleteProdotto(ID);
+            } catch (NumberFormatException e) {
+            }
             response.sendRedirect(request.getContextPath() + "/admin?action=prodotti");
         }
-
-
     }
-
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

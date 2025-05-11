@@ -26,7 +26,7 @@
                 </div>
                 <div class="detail">
                     <label for="prezzo">Prezzo</label>
-                    <input type="number" placeholder="Prezzo $" name="Prezzo" id="prezzo" step="0.01" required>
+                    <input type="number" placeholder="Prezzo &euro;" name="Prezzo" id="prezzo" step="0.01" required>
                 </div>
             </div>
             <div class="row">
@@ -42,11 +42,10 @@
                 <div class="detail">
                     <label for="categoria">Categoria</label>
                     <select placeholder="Categoria" name="Categoria" id="categoria" required>
-                        <option>racchette</option>
-                        <option>tavoli</option>
-                        <option>palline</option>
-                        <option>abbigliamento</option>
-                        <option>altro</option>
+                        <option>spaventose</option>
+                        <option>natale</option>
+                        <option>fantasy</option>
+                        <option>professioni</option>
                     </select>
                 </div>
             </div>

@@ -10,12 +10,12 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/errore")
-
 public class ErrorServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        // Forward generico a pagina di errore
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/ErrorPage.jsp");
         dispatcher.forward(request, response);
     }

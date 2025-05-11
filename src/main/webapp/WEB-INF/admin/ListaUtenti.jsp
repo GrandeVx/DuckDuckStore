@@ -22,6 +22,7 @@
             <th>Nome</th>
             <th>Cognome</th>
             <th>Email</th>
+            <th>Saldo</th>
             <th>Amministratore</th>
         </tr>
         <% for (Utente ut : listaUtenti) { %>
@@ -31,6 +32,9 @@
             <td><%= ut.getCognome() %>
             </td>
             <td><%= ut.getEmail() %>
+            </td>
+            <td><%= ut.getSaldo() %>
+            </td>
             <td>
                 <div class="admin-buttons">
                     <button class="toggle <%= ut.isAmministratore() ? "non-admin" : "admin" %>"
