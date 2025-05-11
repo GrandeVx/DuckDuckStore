@@ -1,10 +1,6 @@
-# TTunisa - Applicazione Web di Ping Pong
+# DuckDuckStore
 
 ## Esecuzione con Docker
-
-### Prerequisiti
-- Docker
-- Docker Compose
 
 ### Avvio dell'applicazione
 1. Clona il repository
@@ -21,11 +17,11 @@ Il database MySQL viene automaticamente inizializzato con lo script `db.sql` pre
 
 ### Variabili d'ambiente
 È possibile configurare le seguenti variabili d'ambiente nel file `docker-compose.yml`:
-- `MYSQL_HOST`: Host del database MySQL (default: db)
+- `MYSQL_HOST`: Host del database MySQL (default: mysql)
 - `MYSQL_PORT`: Porta del database MySQL (default: 3306)
-- `MYSQL_DB`: Nome del database (default: ttunisa)
+- `MYSQL_DB`: Nome del database (default: DuckDuckStore)
 - `MYSQL_USER`: Utente MySQL (default: root)
-- `MYSQL_PASSWORD`: Password MySQL (default: mysq)
+- `MYSQL_PASSWORD`: Password MySQL (default: root)
 
 ## Struttura dell'applicazione
 - Applicazione web Java basata su Tomcat

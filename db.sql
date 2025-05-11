@@ -1,9 +1,7 @@
--- Creazione del database
-DROP DATABASE IF EXISTS ttunisa;
-CREATE DATABASE ttunisa;
-USE ttunisa;
+DROP DATABASE IF EXISTS DuckDuckStore;
+CREATE DATABASE DuckDuckStore;
+USE DuckDuckStore;
 
--- Creazione della tabella "utente"
 CREATE TABLE utente
 (
     utente_ID      INT AUTO_INCREMENT PRIMARY KEY,
@@ -15,8 +13,6 @@ CREATE TABLE utente
     amministratore BOOLEAN        NOT NULL
 );
 
-
--- Creazione della tabella "prodotto"
 CREATE TABLE prodotto
 (
     prodotto_ID     INT AUTO_INCREMENT PRIMARY KEY,
@@ -30,8 +26,6 @@ CREATE TABLE prodotto
     numero_acquisti INT DEFAULT 0
 );
 
-
--- Creazione della tabella "ordine"
 CREATE TABLE ordine
 (
     ordine_ID  INT AUTO_INCREMENT PRIMARY KEY,
@@ -44,42 +38,31 @@ CREATE TABLE ordine
 
 
 INSERT INTO utente (nome, cognome, saldo, email, pass, amministratore)
-VALUES ('Francesco', 'Durante', 10000, 'francesco@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
+-- le password sono il solo nome il minuscolo, esempio: per Vito la password e' "vito"
+VALUES  ('Vito', 'Altieri', 10000, 'vito@gmail.com',
+        '9b592838e90a2adb1358c5496934792b0246de9dc230ab553d2622117884f3031c440a78ba579716401b862a27d6e5144b81208b15e829ea6aebe6d7c422a2e8',
         TRUE),
-       ('Orazio', 'Torre', 10000, 'orazio@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
-        FALSE),
-       ('Giulia', 'Verdi', 12000, 'giulia@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
-        FALSE),
-       ('Luca', 'Rossi', 8000, 'luca@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
-        FALSE),
-       ('Chiara', 'Bianchi', 9500, 'chiara@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
-        FALSE),
-       ('Marco', 'Neri', 7000, 'marco@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
-        FALSE),
-       ('Elena', 'Ferrari', 11000, 'elena@gmail.com',
-        'fa585d89c851dd338a70dcf535aa2a92fee7836dd6aff1226583e88e0996293f16bc009c652826e0fc5c706695a03cddce372f139eff4d13959da6f1f5d3eabe',
-        FALSE);
+        ('Vittorio', "D'Alfonso", 10000, 'vittorio@gmail.com',
+        'e0098f8bd8ade0638c23fb2f3ff534bca3ac87b9fa6367f5040ac77451d7fd75cf925ff1a799b0da9478ae9883f65fdf28638da94e02af542326c24789631229',
+        TRUE),
+        ('Matteo Ferdinando', 'Emolo', 10000, 'matteo@gmail.com',
+        'c2ed182680410c5bf65559f2d005bf3262bddcffd8b1f3d69c20263af677f9be3eee013a8905d3f96245d177c1c1a5929d0c607cf2bf6e8eb5bbfa16bd0a4c3e',
+        TRUE);
 
 INSERT INTO prodotto (nome, descrizione, prezzo, quantita, sconto, categoria, img)
-VALUES ('Pongori Palline', 'Set di palline silenziose', 5, 50, 0, 'palline',
+VALUES  ('Pongori Palline', 'Set di palline silenziose', 5, 50, 0, 'palline',
         'https://contents.mediadecathlon.com/p2485695/k$5ad2fa81fd31dedc99118c03fce1e2a2/sq/8790388.jpg?format=auto&f=320x320'),
-       ('Racchetta Stiga', 'racchetta professionale', 45, 10, 5, 'racchette',
-		'https://contents.mediadecathlon.com/m11584230/k$6b52acd5b11e268f37e4d7ce7dcd5361/sq/2406b9e2-371d-4965-8a59-a4b8d02909d7_c1.jpg?format=auto&f=320x320'),
-       ('Borsa da tennis table', 'borsa capiente e resistente', 60, 7, 10, 'altro',
-		'https://contents.mediadecathlon.com/p1818463/k$baa228586f5fbb6b704d1cd0bd249caf/sq/8558317.jpg?format=auto&f=320x320'),
-       ('Pongori Palline', 'set di 6 palline', 12, 30, 0, 'palline',
-		'https://contents.mediadecathlon.com/p1939222/k$46844f70283cf97e46b4087306b4dcca/sq/8648795.jpg?format=auto&f=320x320'),
+        ('Racchetta Stiga', 'racchetta professionale', 45, 10, 5, 'racchette',
+        'https://contents.mediadecathlon.com/m11584230/k$6b52acd5b11e268f37e4d7ce7dcd5361/sq/2406b9e2-371d-4965-8a59-a4b8d02909d7_c1.jpg?format=auto&f=320x320'),
+        ('Borsa da tennis table', 'borsa capiente e resistente', 60, 7, 10, 'altro',
+        'https://contents.mediadecathlon.com/p1818463/k$baa228586f5fbb6b704d1cd0bd249caf/sq/8558317.jpg?format=auto&f=320x320'),
+        ('Pongori Palline', 'set di 6 palline', 12, 30, 0, 'palline',
+        'https://contents.mediadecathlon.com/p1939222/k$46844f70283cf97e46b4087306b4dcca/sq/8648795.jpg?format=auto&f=320x320'),
         ('Dione Tavolo', 'tavolo di alta qualità', 300, 5, 15, 'tavoli',
-		'https://contents.mediadecathlon.com/p2157213/k$790b47c39f847109d8a832acb1f21ea7/sq/8352846.jpg?format=auto&f=320x320'),
-		('Pongori Rete','Rete portabile per uso domestico',10,10,20,'altro',
+        'https://contents.mediadecathlon.com/p2157213/k$790b47c39f847109d8a832acb1f21ea7/sq/8352846.jpg?format=auto&f=320x320'),
+        ('Pongori Rete','Rete portabile per uso domestico',10,10,20,'altro',
         'https://contents.mediadecathlon.com/p1902468/k$61a8c75d6156e0f89a273a30d4dc3d6a/sq/8501506.jpg?format=auto&f=320x320'),
-		('Tibhar Sacco','Sacca da table tennis',12,20,0,'altro',
+        ('Tibhar Sacco','Sacca da table tennis',12,20,0,'altro',
         'https://contents.mediadecathlon.com/p1339332/k$6a926f90f8ae295d849569470c46c4e0/sq/8406140.jpg?format=auto&f=320x320'),
         ('Artengo Calze','Calze medie junior',6,30,25,'abbigliamento',
         'https://contents.mediadecathlon.com/p1539710/k$e4003fc7b6c1f1f3719ca59439922c1d/sq/8523833.jpg?format=auto&f=320x320'),
@@ -101,8 +84,8 @@ VALUES ('Pongori Palline', 'Set di palline silenziose', 5, 50, 0, 'palline',
         'https://contents.mediadecathlon.com/p2680703/k$535268da3cbe50ed02de18068e2c6f84/sq/8916517.jpg?format=auto&f=320x320'),
         ('Tibhar Robot','Robot lancia palline ping pong',280,3,0,'altro','https://contents.mediadecathlon.com/p346816/k$0d44e85256f704f8aaa35b359e133efa/sq/8319180.jpg?format=auto&f=320x320'),
         ('Stiga Legno','Racchetta table tennis di legno',120,12,20,'racchette','https://contents.mediadecathlon.com/m12308652/k$88d6c376e3527193667cac8ff84a7bb4/sq/bcfddbf6-d030-4730-a194-689047ed7c4e_c1.jpg?format=auto&f=320x320'),
-		('Pongori','Tavolo da tennis table blu',210,10,0,'tavoli','https://contents.mediadecathlon.com/p2467191/k$ef5900dde64bfc7a6cfa7866c6cd07e5/sq/8804772.jpg?format=auto&f=320x320'),
-		('Pongori','Tavolo da tennis table nero',210,7,0,'tavoli','https://contents.mediadecathlon.com/p2467199/k$221499e00a01abd3e03a902ddeb99b8f/sq/8733511.jpg?format=auto&f=320x320'),
+        ('Pongori','Tavolo da tennis table blu',210,10,0,'tavoli','https://contents.mediadecathlon.com/p2467191/k$ef5900dde64bfc7a6cfa7866c6cd07e5/sq/8804772.jpg?format=auto&f=320x320'),
+        ('Pongori','Tavolo da tennis table nero',210,7,0,'tavoli','https://contents.mediadecathlon.com/p2467199/k$221499e00a01abd3e03a902ddeb99b8f/sq/8733511.jpg?format=auto&f=320x320'),
         ('Pongori','Tavolo da tennis table grigio',210,6,0,'tavoli','https://contents.mediadecathlon.com/p1729644/k$6c880a920ca169be050d8de167042bc3/sq/8572240.jpg?format=auto&f=320x320'),
         ('Pongori','Tavolo da tennis table baby',180,10,0,'tavoli','https://contents.mediadecathlon.com/p2166731/k$79e99566c123ff4b159c8da6cbdd851c/sq/8736742.jpg?format=auto&f=320x320'),
         ('Stiga Legno','Racchetta table tennis di legno',190,5,30,'racchette','https://contents.mediadecathlon.com/m14168824/k$030fd2992617b33f0d23011a143a8618/sq/5340d8b0-39fe-4542-9704-c27f5373d6fb_c27.jpg?format=auto&f=320x320'),
@@ -113,5 +96,3 @@ VALUES ('Pongori Palline', 'Set di palline silenziose', 5, 50, 0, 'palline',
         ('Cornilleau','Racchetta ergonomica',50,7,0,'racchette','https://contents.mediadecathlon.com/m9508686/k$0a266f0a23d6b909c6bf4401c8674272/sq/24ca2776-98a2-4ef3-be29-0e29e9541ecf_c1c1.jpg?format=auto&f=320x320'),
         ('Joola','Racchetta table tennis nera',100,2,10,'racchette','https://contents.mediadecathlon.com/m14602869/k$e2f05d690f14b9392f8b243e5e92b767/sq/483b9104-33b7-44ed-b108-fb57df43d533_c255.jpg?format=auto&f=320x320'),
         ('Joola','Racchetta table tennis blu',100,12,15,'racchette','https://contents.mediadecathlon.com/m16212372/k$677112447d7c6903c61a2146016ed831/sq/7dbfcbc2-6c0a-4066-9eea-4ee715bc99aa_c6.jpg?format=auto&f=320x320');
-        
-

@@ -1,0 +1,48 @@
+-- Creazione del database
+CREATE DATABASE IF NOT EXISTS DuckDuckStore;
+
+-- Selezione del database
+USE DuckDuckStore;
+
+-- CREAZIONE DELLE TABELLE
+
+-- Entita' Utenti
+DROP TABLE IF EXISTS Utente;
+CREATE TABLE Utente (
+    `ID` INT NOT NULL AUTO_INCREMENT,
+    `Nome` VARCHAR(64) NOT NULL,
+    `Cognome` VARCHAR(64) NOT NULL,
+    `Email` VARCHAR(64) NOT NULL,
+    `PasswordHash` CHAR(64),
+    `Amministratore` BOOLEAN NOT NULL DEFAULT FALSE,
+    `Registrato` BOOLEAN NOT NULL DEFAULT FALSE,
+
+    PRIMARY KEY (`ID`),
+    UNIQUE (`Email`),
+
+    CONSTRAINT admin_registrato CHECK (NOT `Amministratore` OR `Registrato`),
+    CONSTRAINT registrato_password CHECK (`Registrato` XOR `PasswordHash` IS NULL)
+);
+
+-- Entita' Prodotti
+DROP TABLE IF EXISTS Prodotto;
+CREATE TABLE Prodotto (
+    `ID` INT NOT NULL AUTO_INCREMENT,
+    `Nome` VARCHAR(64) NOT NULL,
+    `Descrizione` TEXT NOT NULL,
+    `Prezzo` DECIMAL(5, 2) NOT NULL,
+
+    PRIMARY KEY (`ID`)
+);
+
+-- Entita' Ordini
+DROP TABLE IF EXISTS Ordine;
+CREATE TABLE Ordine (
+    `ID` INT NOT NULL AUTO_INCREMENT,
+    `UtenteID` INT NOT NULL,
+    `DataOrdine` DATE NOT NULL,
+    `Carrello` JSON NOT NULL,
+
+    PRIMARY KEY (`ID`),
+    FOREIGN KEY (`UtenteID`) REFERENCES Utente(`ID`)
+);

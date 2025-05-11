@@ -19,15 +19,5 @@ RUN rm -rf /usr/local/tomcat/webapps/*
 # Copia il file WAR generato nella cartella webapps di Tomcat
 COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
 
-# Configura il database MySQL
-ENV MYSQL_HOST=db
-ENV MYSQL_PORT=3306
-ENV MYSQL_DB=ttunisa
-ENV MYSQL_USER=root
-ENV MYSQL_PASSWORD=mysq
-
-# Esponi la porta 8080
-EXPOSE 8080
-
 # Comando di avvio
-CMD ["catalina.sh", "run"] 
+CMD ["catalina.sh", "run"]

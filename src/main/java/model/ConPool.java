@@ -12,9 +12,9 @@ public class ConPool {
     private static DataSource datasource;
     static String ip = System.getenv("MYSQL_HOST") != null ? System.getenv("MYSQL_HOST") : "localhost";
     static String port = System.getenv("MYSQL_PORT") != null ? System.getenv("MYSQL_PORT") : "3306";
-    static String db = System.getenv("MYSQL_DB") != null ? System.getenv("MYSQL_DB") : "ttunisa";
+    static String db = System.getenv("MYSQL_DB") != null ? System.getenv("MYSQL_DB") : "DuckDuckStore";
     static String username = System.getenv("MYSQL_USER") != null ? System.getenv("MYSQL_USER") : "root";
-    static String password = System.getenv("MYSQL_PASSWORD") != null ? System.getenv("MYSQL_PASSWORD") : "mysq";
+    static String password = System.getenv("MYSQL_PASSWORD") != null ? System.getenv("MYSQL_PASSWORD") : "root";
 
     public static synchronized Connection getConnection() throws SQLException {
 

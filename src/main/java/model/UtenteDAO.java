@@ -13,7 +13,7 @@ public class UtenteDAO extends HttpServlet {
     public static ArrayList<Utente> doRetriveUtente() {
         ArrayList<Utente> u = new ArrayList<Utente>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM Utente");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM utente");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Utente utente = new Utente();
@@ -148,6 +148,4 @@ public class UtenteDAO extends HttpServlet {
             throw new RuntimeException("Errore durante l'aggiornamento dell'utente.", e);
         }
     }
-
-
 }
