@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS DuckDuckStore;
 CREATE DATABASE DuckDuckStore;
 USE DuckDuckStore;
 
-CREATE TABLE utente
+CREATE TABLE utenti
 (
     utente_ID      INT AUTO_INCREMENT PRIMARY KEY,
     nome           VARCHAR(25)    NOT NULL,
@@ -13,7 +13,7 @@ CREATE TABLE utente
     amministratore BOOLEAN        NOT NULL
 );
 
-CREATE TABLE prodotto
+CREATE TABLE prodotti
 (
     prodotto_ID     INT AUTO_INCREMENT PRIMARY KEY,
     nome            VARCHAR(100)   NOT NULL,
@@ -26,18 +26,18 @@ CREATE TABLE prodotto
     numero_acquisti INT DEFAULT 0
 );
 
-CREATE TABLE ordine
+CREATE TABLE ordini
 (
     ordine_ID  INT AUTO_INCREMENT PRIMARY KEY,
     prezzo_tot DECIMAL(10, 2) NOT NULL,
     data       DATE           NOT NULL,
     scontrino  JSON,
     utente_ID  INT,
-    FOREIGN KEY (utente_ID) REFERENCES utente (utente_ID)
+    FOREIGN KEY (utente_ID) REFERENCES utenti (utente_ID)
 );
 
 
-INSERT INTO utente (nome, cognome, saldo, email, pass, amministratore)
+INSERT INTO utenti (nome, cognome, saldo, email, pass, amministratore)
 -- le password sono il solo nome il minuscolo, esempio: per Vito la password e' "vito"
 VALUES  ('Vito', 'Altieri', 10000, 'vito@gmail.com',
         '9b592838e90a2adb1358c5496934792b0246de9dc230ab553d2622117884f3031c440a78ba579716401b862a27d6e5144b81208b15e829ea6aebe6d7c422a2e8',
@@ -50,7 +50,7 @@ VALUES  ('Vito', 'Altieri', 10000, 'vito@gmail.com',
         TRUE);
 
 
-INSERT INTO prodotto (nome, descrizione, prezzo, quantita, sconto, categoria, img)
+INSERT INTO prodotti (nome, descrizione, prezzo, quantita, sconto, categoria, img)
 VALUES  ('Cyber Duck', 'Cyber Rubber Duck. Compra il malvagio imperatore del Milan Duck Store. Dirige Cyber, il centro del lato oscuro. Che la forza sia con noi...', 12, 50, 0, 'spaventose',
         'https://milanduckstore.com/wp-content/uploads/2019/04/cyber-360x360.png'),
         ('Albero di Natale', "Christmas tree. Sicuramente non avetemai avuto un albero di Natale cosi' carino. Un regalo da mettere sotto l'albero o una semplice decorazione", 15, 50, 5, 'natale',

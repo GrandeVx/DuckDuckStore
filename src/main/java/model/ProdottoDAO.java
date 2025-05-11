@@ -11,7 +11,7 @@ public class ProdottoDAO {
     public static ArrayList<Prodotto> doRetrieveProdotto() {
         ArrayList<Prodotto> p = new ArrayList<Prodotto>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotti");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Prodotto prodotto = new Prodotto();
@@ -34,7 +34,7 @@ public class ProdottoDAO {
     public static ArrayList<Prodotto> doRetrieveProdottoScontato() {
         ArrayList<Prodotto> p = new ArrayList<Prodotto>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE sconto != 0 ORDER BY sconto desc");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotti WHERE sconto != 0 ORDER BY sconto DESC");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Prodotto prodotto = new Prodotto();
@@ -57,7 +57,7 @@ public class ProdottoDAO {
     public static ArrayList<Prodotto> doRetrieveByCategory(String category) {
         ArrayList<Prodotto> p = new ArrayList<Prodotto>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE categoria = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotti WHERE categoria = ?");
             ps.setString(1, category);
 
             ResultSet rs = ps.executeQuery();
@@ -83,7 +83,7 @@ public class ProdottoDAO {
     public static ArrayList<Prodotto> doRetrieveBySearch(String search) {
         ArrayList<Prodotto> p = new ArrayList<Prodotto>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE nome LIKE ? OR descrizione LIKE ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotti WHERE nome LIKE ? OR descrizione LIKE ?");
             search = "%" + search + "%";
             ps.setString(1, search);
             ps.setString(2, search);
@@ -111,7 +111,7 @@ public class ProdottoDAO {
     public static ArrayList<Prodotto> doRetrieveOrderByAcquisti() {
         ArrayList<Prodotto> p = new ArrayList<Prodotto>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto ORDER BY numero_acquisti desc");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotti ORDER BY numero_acquisti DESC");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Prodotto prodotto = new Prodotto();
@@ -134,7 +134,7 @@ public class ProdottoDAO {
 
     public static Prodotto findProduct(int ID) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotto WHERE prodotto_ID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM prodotti WHERE prodotto_ID = ?");
             ps.setInt(1, ID);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -157,7 +157,7 @@ public class ProdottoDAO {
 
     public static void addProdotto(Prodotto prodotto) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO prodotto (nome, descrizione, prezzo, quantita, sconto, categoria, img) VALUES (?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO prodotti (nome, descrizione, prezzo, quantita, sconto, categoria, img) VALUES (?, ?, ?, ?, ?, ?, ?)");
             ps.setString(1, prodotto.getNome());
             ps.setString(2, prodotto.getDescrizione());
             ps.setDouble(3, prodotto.getPrezzo());
@@ -174,12 +174,12 @@ public class ProdottoDAO {
 
     public static void deleteProdotto(int prodotto_ID) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("DELETE FROM prodotto WHERE prodotto_ID = ?");
+            PreparedStatement ps = con.prepareStatement("DELETE FROM prodotti WHERE prodotto_ID = ?");
             ps.setInt(1, prodotto_ID);
-            int rowsDeleted = ps.executeUpdate();
+            int righeRimosse = ps.executeUpdate();
 
-            if (rowsDeleted == 0) {
-                throw new RuntimeException("Failed to delete product with ID: " + prodotto_ID + ". Product not found.");
+            if (righeRimosse == 0) {
+                throw new RuntimeException("Errore nella rimozione del prodotto con ID: " + prodotto_ID + ". Prodotto non trovato.");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -189,7 +189,7 @@ public class ProdottoDAO {
 
     public static void modifyProdotto(Prodotto prodotto) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE prodotto SET nome = ?, descrizione = ?, prezzo = ?, quantita = ?, sconto = ?, categoria =?, img = ? WHERE prodotto_ID = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE prodotti SET nome = ?, descrizione = ?, prezzo = ?, quantita = ?, sconto = ?, categoria =?, img = ? WHERE prodotto_ID = ?");
             ps.setString(1, prodotto.getNome());
             ps.setString(2, prodotto.getDescrizione());
             ps.setDouble(3, prodotto.getPrezzo());
@@ -201,7 +201,7 @@ public class ProdottoDAO {
             int rows = ps.executeUpdate();
 
             if (rows == 0) {
-                throw new RuntimeException("Failed to update product with ID: " + prodotto.getID() + ". Product not found.");
+                throw new RuntimeException("Errore nella modifica del prodotto con ID: " + prodotto.getID() + ". Prodotto non trovato.");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -211,12 +211,12 @@ public class ProdottoDAO {
 
     public static void updateQuantitaDisponibile(Prodotto p, int nuovaQuantita) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE prodotto SET quantita = ? WHERE prodotto_ID = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE prodotti SET quantita = ? WHERE prodotto_ID = ?");
             ps.setInt(1, nuovaQuantita);
             ps.setInt(2, p.getID());
-            int rows = ps.executeUpdate();
+            int righe = ps.executeUpdate();
 
-            if (rows == 0) {
+            if (righe == 0) {
                 throw new RuntimeException("Impossibile aggiornare la quantità");
             }
         } catch (SQLException e) {
@@ -226,12 +226,12 @@ public class ProdottoDAO {
 
     public static void updateAcquisti(int ID) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("UPDATE prodotto SET numero_acquisti = numero_acquisti+1 WHERE prodotto_ID = ?");
+            PreparedStatement ps = con.prepareStatement("UPDATE prodotti SET numero_acquisti = numero_acquisti+1 WHERE prodotto_ID = ?");
             ps.setInt(1, ID);
             int rows = ps.executeUpdate();
 
             if (rows == 0) {
-                throw new RuntimeException("Failed to update product with ID: " + ID + ". Product not found.");
+                throw new RuntimeException("Errore nella modifica del prodotto con ID: " + ID + ". Prodotto non trovato.");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

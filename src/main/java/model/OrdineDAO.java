@@ -18,7 +18,7 @@ public class OrdineDAO {
     public static ArrayList<Ordine> doRetrieveOrdine(int ID_utente) {
         ArrayList<Ordine> o = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM ordine WHERE utente_ID = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM ordini WHERE utente_ID = ?");
             ps.setInt(1, ID_utente);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -42,7 +42,7 @@ public class OrdineDAO {
     public static void addOrdine(Ordine ordine) {
 
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO ordine (prezzo_tot, data, scontrino, utente_ID) VALUES (?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO ordini (prezzo_tot, data, scontrino, utente_ID) VALUES (?, ?, ?, ?)");
             ps.setDouble(1, ordine.getPrezzo_tot());
             GregorianCalendar data = ordine.getData();
             ps.setDate(2, new java.sql.Date(data.getTimeInMillis()));
@@ -57,7 +57,7 @@ public class OrdineDAO {
 
     public static ArrayList<Ordine> doRetrieveOrdini(Integer utenteId, java.sql.Date from, java.sql.Date to) {
         ArrayList<Ordine> ordini = new ArrayList<>();
-        StringBuilder query = new StringBuilder("SELECT * FROM ordine WHERE 1=1");
+        StringBuilder query = new StringBuilder("SELECT * FROM ordini WHERE 1=1");
         if (utenteId != null) query.append(" AND utente_ID = ?");
         if (from != null) query.append(" AND data >= ?");
         if (to != null) query.append(" AND data <= ?");

@@ -10,7 +10,7 @@ public class UtenteDAO {
     public static ArrayList<Utente> doRetrieveUtente() {
         ArrayList<Utente> u = new ArrayList<>();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM utente");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM utenti");
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Utente utente = new Utente();
@@ -34,7 +34,7 @@ public class UtenteDAO {
             return null;
         Utente utente = new Utente();
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT * FROM utente WHERE email = ? AND pass = ?");
+            PreparedStatement ps = con.prepareStatement("SELECT * FROM utenti WHERE email = ? AND pass = ?");
             ps.setString(1, email);
             ps.setString(2, Utilities.toHash(password));
             ResultSet rs = ps.executeQuery();
@@ -58,7 +58,7 @@ public class UtenteDAO {
     public static void doRegistration(Utente utente) {
 
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("INSERT INTO utente (nome, cognome, email, pass, saldo, amministratore) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement ps = con.prepareStatement("INSERT INTO utenti (nome, cognome, email, pass, saldo, amministratore) VALUES (?, ?, ?, ?, ?, ?)");
             ps.setString(1, utente.getNome().substring(0, 1).toUpperCase() + utente.getNome().substring(1).toLowerCase());
             ps.setString(2, utente.getCognome().substring(0, 1).toUpperCase() + utente.getCognome().substring(1).toLowerCase());
             ps.setString(3, utente.getEmail());
@@ -74,7 +74,7 @@ public class UtenteDAO {
 
     public static boolean isNewEmail(String email) {
         try (Connection con = ConPool.getConnection()) {
-            PreparedStatement ps = con.prepareStatement("SELECT email FROM utente WHERE email=?");
+            PreparedStatement ps = con.prepareStatement("SELECT email FROM utenti WHERE email=?");
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -90,7 +90,7 @@ public class UtenteDAO {
     public static void updateSaldo(Utente utente, double saldoNuovo) {
 
         try (Connection con = ConPool.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE utente SET saldo = ? WHERE utente_ID = ?")) {
+             PreparedStatement ps = con.prepareStatement("UPDATE utenti SET saldo = ? WHERE utente_ID = ?")) {
 
             ps.setDouble(1, saldoNuovo);
             ps.setInt(2, utente.getID());
@@ -109,7 +109,7 @@ public class UtenteDAO {
     public static synchronized void setNewStatus(int ID, boolean statusNuovo) {
 
         try (Connection con = ConPool.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE utente SET amministratore = ? WHERE utente_ID = ?")) {
+             PreparedStatement ps = con.prepareStatement("UPDATE utenti SET amministratore = ? WHERE utente_ID = ?")) {
 
             ps.setBoolean(1, statusNuovo);
             ps.setInt(2, ID);
@@ -127,7 +127,7 @@ public class UtenteDAO {
 
     public static void updateUser(Utente u) {
         try (Connection con = ConPool.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE utente SET nome = ?, cognome = ?, email = ?, pass = ?  WHERE utente_ID = ?")) {
+             PreparedStatement ps = con.prepareStatement("UPDATE utenti SET nome = ?, cognome = ?, email = ?, pass = ?  WHERE utente_ID = ?")) {
 
             ps.setString(1, u.getNome().substring(0, 1).toUpperCase() + u.getNome().substring(1).toLowerCase());
             ps.setString(2, u.getCognome().substring(0, 1).toUpperCase() + u.getCognome().substring(1).toLowerCase());
