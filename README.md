@@ -8,8 +8,10 @@
 3. Esegui il comando:
 ```
 docker-compose up --build
+oppure
+docker-compose -f docker-compose.dev.yml up
+per avviare l'applicazione in modalità sviluppo
 ```
-
 4. L'applicazione sarà disponibile all'indirizzo: http://localhost:8080
 
 ### Configurazione del database

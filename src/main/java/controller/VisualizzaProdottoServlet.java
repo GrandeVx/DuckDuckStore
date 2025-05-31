@@ -21,14 +21,14 @@ public class VisualizzaProdottoServlet extends HttpServlet {
             int ID = Integer.parseInt(request.getParameter("ID"));
             Prodotto p = ProdottoDAO.findProduct(ID);
             if (p == null) {
-                response.sendRedirect(request.getContextPath());
+                response.sendRedirect(request.getContextPath() + "/home");
                 return;
             }
             request.setAttribute("prodotto", p);
             RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Product.jsp");
             dispatcher.forward(request, response);
         } catch (NumberFormatException | NullPointerException e) {
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/home");
         }
     }
 

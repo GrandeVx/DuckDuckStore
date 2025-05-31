@@ -1,5 +1,8 @@
 package controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,9 +11,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Prodotto;
 import model.ProdottoDAO;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 @WebServlet("/search")
 public class SearchServlet extends HttpServlet {
@@ -21,49 +21,42 @@ public class SearchServlet extends HttpServlet {
 
         String category = request.getParameter("category");
         String query = request.getParameter("query");
+        String sort = request.getParameter("sort");
+
+        ArrayList<Prodotto> prodotti = null;
 
         if (category == null || category.isEmpty()) {
 
-            if (query == null || query.isEmpty()) {
+            if (query == null || query.isEmpty() || "null".equalsIgnoreCase(query)) {
                 //RESTITUISCE TUTTI I PRODOTTI
-                ArrayList<Prodotto> prodotti = ProdottoDAO.doRetrieveProdotto();
+                prodotti = ProdottoDAO.doRetrieveProdotto();
                 request.setAttribute("query", "Tutti i prodotti");
-                request.setAttribute("listaProdotti", prodotti);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
-                dispatcher.forward(request, response);
-                return;
-
             } else {
                 //RICERCA PER QUERY
                 if (query.equals("offerte")) {
                     //RESTITUISCE I PRODOTTI SCONTATI
-                    ArrayList<Prodotto> prodotti = ProdottoDAO.doRetrieveProdottoScontato();
+                    prodotti = ProdottoDAO.doRetrieveProdottoScontato();
                     request.setAttribute("query", "Offerte");
-                    request.setAttribute("listaProdotti", prodotti);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
-                    dispatcher.forward(request, response);
-                    return;
-
                 } else {
                     //QUERY STANDARD
-                    ArrayList<Prodotto> prodotti = ProdottoDAO.doRetrieveBySearch(query);
+                    prodotti = ProdottoDAO.doRetrieveBySearch(query);
                     request.setAttribute("query", query);
-                    request.setAttribute("listaProdotti", prodotti);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
-                    dispatcher.forward(request, response);
-                    return;
                 }
             }
         } else {
             //RICERCA PER CATEGORIA
-            ArrayList<Prodotto> prodotti = ProdottoDAO.doRetrieveByCategory(category);
+            prodotti = ProdottoDAO.doRetrieveByCategory(category);
             request.setAttribute("query", category);
-            request.setAttribute("listaProdotti", prodotti);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
-            dispatcher.forward(request, response);
-            return;
-
         }
+
+        // Applica l'ordinamento se richiesto
+        if (prodotti != null && sort != null && !sort.isEmpty()) {
+            prodotti = ProdottoDAO.sortProducts(prodotti, sort);
+        }
+
+        request.setAttribute("listaProdotti", prodotti);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/results/Ricerca_Prodotti.jsp");
+        dispatcher.forward(request, response);
     }
 
     @Override

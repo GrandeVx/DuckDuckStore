@@ -71,7 +71,7 @@ public class Carrello {
         return count;
     }
 
-    public void checkout(Utente utenteLoggato){
+    public void checkout(Utente utenteLoggato, IndirizzoConsegna indirizzoConsegna, InfoPagamento infoPagamento){
 
         for (Prodotto prodotto : this.prodottiCarrello) {
             int quantitaDisponibile = ProdottoDAO.findProduct(prodotto.getID()).getQuantita();
@@ -88,7 +88,8 @@ public class Carrello {
         String scontrino = Utilities.prodottiToScontrino(this.getProdotti());
         ordine.setScontrino(scontrino);
         ordine.setUtente_ID(utenteLoggato.getID());
-
+        ordine.setIndirizzoConsegna(indirizzoConsegna);
+        ordine.setInfoPagamento(infoPagamento);
 
         utenteLoggato.setSaldo(utenteLoggato.getSaldo() - prezzoTot);
         UtenteDAO.updateSaldo(utenteLoggato, utenteLoggato.getSaldo());
@@ -98,6 +99,11 @@ public class Carrello {
         this.updateStatisticheProdotti();
         OrdineDAO.addOrdine(ordine);
 
+    }
+
+    @Deprecated
+    public void checkout(Utente utenteLoggato){
+        throw new UnsupportedOperationException("Checkout requires delivery address and payment information. Use checkout(Utente, IndirizzoConsegna, InfoPagamento) instead.");
     }
 
     public int checkoutErrors(Utente utenteLoggato) {

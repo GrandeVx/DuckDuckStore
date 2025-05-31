@@ -1,6 +1,7 @@
 package controller;
 
-import model.*;
+import java.io.IOException;
+
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,14 +9,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+import model.Utente;
+import model.UtenteDAO;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -42,11 +41,11 @@ public class LoginServlet extends HttpServlet {
                 } else {
                     session.removeAttribute("isAdmin");
                 }
-                response.sendRedirect(request.getContextPath());
+                response.sendRedirect(request.getContextPath() + "/home");
             }
         } else if ("logout".equals(action)) {
             session.invalidate();
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/home");
         }
     }
 

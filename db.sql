@@ -33,9 +33,27 @@ CREATE TABLE ordini
     data       DATE           NOT NULL,
     scontrino  JSON,
     utente_ID  INT,
+    -- Delivery Address Fields
+    delivery_nome VARCHAR(50) NOT NULL,
+    delivery_cognome VARCHAR(50) NOT NULL,
+    delivery_via VARCHAR(150) NOT NULL,
+    delivery_citta VARCHAR(50) NOT NULL,
+    delivery_cap VARCHAR(5) NOT NULL,
+    delivery_telefono VARCHAR(25),
+    delivery_note TEXT,
+    -- Payment Information Fields (encrypted for security simulation)
+    payment_card_holder VARCHAR(100) NOT NULL,
+    payment_card_number VARCHAR(255) NOT NULL, -- encrypted
+    payment_card_expiry VARCHAR(50) NOT NULL,  -- encrypted
+    payment_card_cvv VARCHAR(50) NOT NULL,     -- encrypted
+    payment_method ENUM('card') DEFAULT 'card',
+    payment_status ENUM('completed', 'failed', 'pending') DEFAULT 'completed',
     FOREIGN KEY (utente_ID) REFERENCES utenti (utente_ID)
 );
 
+-- Index for better performance on user orders
+CREATE INDEX idx_ordini_utente ON ordini(utente_ID);
+CREATE INDEX idx_ordini_data ON ordini(data);
 
 INSERT INTO utenti (nome, cognome, saldo, email, pass, amministratore)
 -- le password sono il solo nome il minuscolo, esempio: per Vito la password e' "vito"

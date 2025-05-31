@@ -22,13 +22,13 @@ public class UpdateProfilo extends HttpServlet {
 
         HttpSession session = request.getSession(false);
         if (session == null) {
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
 
         Utente u = (Utente) session.getAttribute("Utente");
         if (u == null) {
-            response.sendRedirect(request.getContextPath());
+            response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
 
@@ -52,7 +52,7 @@ public class UpdateProfilo extends HttpServlet {
             UtenteDAO.updateUser(u);
         }
 
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect(request.getContextPath() + "/home");
     }
 
     @Override

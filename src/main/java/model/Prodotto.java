@@ -69,4 +69,16 @@ public class Prodotto {
     public void setImg(String img) {
         this.img = img;
     }
+
+    /**
+     * Calcola il prezzo effettivo del prodotto dopo aver applicato lo sconto
+     *
+     * @return Il prezzo scontato
+     */
+    public double getPrezzoScontato() {
+        if (sconto == 0) {
+            return prezzo;
+        }
+        return prezzo - (prezzo * sconto / 100.0);
+    }
 }

@@ -29,7 +29,7 @@ public class ProfiloServlet extends HttpServlet {
                 return;
             }
         }
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect(request.getContextPath() + "/home");
     }
 
     @Override

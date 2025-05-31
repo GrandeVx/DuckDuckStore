@@ -79,7 +79,7 @@ public class ListaAdminServlet extends HttpServlet {
                 break;
             }
             default:
-                response.sendRedirect(request.getContextPath());
+                response.sendRedirect(request.getContextPath() + "/home");
         }
     }
 

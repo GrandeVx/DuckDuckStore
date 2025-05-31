@@ -237,4 +237,42 @@ public class ProdottoDAO {
             throw new RuntimeException(e);
         }
     }
+
+    /**
+     * Ordina una lista di prodotti in base al criterio specificato
+     *
+     * @param products Lista di prodotti da ordinare
+     * @param sortCriteria Criterio di ordinamento (relevance, price-asc,
+     * price-desc, newest)
+     * @return Lista ordinata di prodotti
+     */
+    public static ArrayList<Prodotto> sortProducts(ArrayList<Prodotto> products, String sortCriteria) {
+        if (sortCriteria == null || sortCriteria.isEmpty() || sortCriteria.equals("relevance")) {
+            // Se il criterio è rilevanza (default) o non specificato, restituisci la lista così com'è
+            return products;
+        }
+
+        switch (sortCriteria) {
+            case "price-asc":
+                // Ordina per prezzo crescente
+                products.sort((p1, p2) -> {
+                    return Double.compare(p1.getPrezzoScontato(), p2.getPrezzoScontato());
+                });
+                break;
+
+            case "price-desc":
+                // Ordina per prezzo decrescente
+                products.sort((p1, p2) -> {
+                    return Double.compare(p2.getPrezzoScontato(), p1.getPrezzoScontato());
+                });
+                break;
+
+            case "newest":
+                // Assumendo che gli ID più alti siano i prodotti più recenti
+                products.sort((p1, p2) -> Integer.compare(p2.getID(), p1.getID()));
+                break;
+        }
+
+        return products;
+    }
 }

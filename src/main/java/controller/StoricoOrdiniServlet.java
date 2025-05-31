@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @WebServlet("/order_history")
+@Deprecated // TODO:
 public class StoricoOrdiniServlet extends HttpServlet {
 
     @Override
@@ -31,7 +32,7 @@ public class StoricoOrdiniServlet extends HttpServlet {
                 return;
             }
         }
-        response.sendRedirect(request.getContextPath());
+        response.sendRedirect(request.getContextPath() + "/home");
     }
 
     @Override
