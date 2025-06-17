@@ -58,4 +58,67 @@
         <url-pattern>*.eot</url-pattern>
     </servlet-mapping>
 
+    <!-- Error Pages Configuration -->
+    <!-- HTTP Error Codes -->
+    <error-page>
+        <error-code>400</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>401</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>405</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>502</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <error-code>503</error-code>
+        <location>/errore</location>
+    </error-page>
+    
+    <!-- Java Exception Types -->
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>java.lang.RuntimeException</exception-type>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>jakarta.servlet.ServletException</exception-type>
+        <location>/errore</location>
+    </error-page>
+    
+    <error-page>
+        <exception-type>java.io.IOException</exception-type>
+        <location>/errore</location>
+    </error-page>
+
 </web-app>

@@ -1,6 +1,7 @@
 <%@ page import="model.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="it">
@@ -19,6 +20,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- jsPDF Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     
     <style>
         .order-history-page {
@@ -371,7 +376,68 @@
                             <div class="order-card">
                                 <div class="order-header">
                                     <h3 class="order-number">Ordine #${ordine.ordine_ID}</h3>
-                                    <span class="order-status">Completato</span>
+                                    <div style="display: flex; gap: 1rem; align-items: center;">
+                                        <span class="order-status">Completato</span>
+                                        
+                                        <!-- Hidden JSON data for invoice generation -->
+                                        <script type="application/json" id="orderData-${ordine.ordine_ID}">
+                                        {
+                                            "orderId": "${ordine.ordine_ID}",
+                                            "orderDate": "<fmt:formatDate value="${ordine.data.time}" pattern="yyyy-MM-dd"/>",
+                                            "total": ${ordine.prezzo_tot},
+                                            "scontrino": "${fn:escapeXml(ordine.scontrino)}",
+                                            "customer": {
+                                                "nome": "${sessionScope.utente.nome}",
+                                                "cognome": "${sessionScope.utente.cognome}",
+                                                "email": "${sessionScope.utente.email}",
+                                                <c:if test="${ordine.indirizzoConsegna != null}">
+                                                "indirizzo": "${ordine.indirizzoConsegna.indirizzoCompleto}",
+                                                "nomeCompleto": "${ordine.indirizzoConsegna.nomeCompleto}",
+                                                "telefono": "${ordine.indirizzoConsegna.telefono}",
+                                                "via": "${ordine.indirizzoConsegna.via}",
+                                                "citta": "${ordine.indirizzoConsegna.citta}",
+                                                "cap": "${ordine.indirizzoConsegna.cap}"
+                                                </c:if>
+                                            },
+                                            "delivery": <c:choose>
+                                                <c:when test="${ordine.indirizzoConsegna != null}">
+                                                {
+                                                    "nome": "${ordine.indirizzoConsegna.nome}",
+                                                    "cognome": "${ordine.indirizzoConsegna.cognome}",
+                                                    "via": "${ordine.indirizzoConsegna.via}",
+                                                    "citta": "${ordine.indirizzoConsegna.citta}",
+                                                    "cap": "${ordine.indirizzoConsegna.cap}",
+                                                    "telefono": "${ordine.indirizzoConsegna.telefono}",
+                                                    "note": "${ordine.indirizzoConsegna.note}"
+                                                }
+                                                </c:when>
+                                                <c:otherwise>null</c:otherwise>
+                                            </c:choose>,
+                                            "payment": <c:choose>
+                                                <c:when test="${ordine.infoPagamento != null}">
+                                                {
+                                                    "cardHolder": "${ordine.infoPagamento.cardHolder}",
+                                                    "maskedCardNumber": "${ordine.infoPagamento.maskedCardNumber}",
+                                                    "paymentStatus": "${ordine.infoPagamento.paymentStatus}"
+                                                }
+                                                </c:when>
+                                                <c:otherwise>null</c:otherwise>
+                                            </c:choose>
+                                        }
+                                        </script>
+                                        
+                                        <button onclick="generateInvoicePDFFromOrderData('${ordine.ordine_ID}')" 
+                                                class="btn btn-outline" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                                <polyline points="14,2 14,8 20,8"></polyline>
+                                                <line x1="16" y1="13" x2="8" y2="13"></line>
+                                                <line x1="16" y1="17" x2="8" y2="17"></line>
+                                                <polyline points="10,9 9,9 8,9"></polyline>
+                                            </svg>
+                                            Fattura PDF
+                                        </button>
+                                    </div>
                                 </div>
 
                                 <div class="order-details">
@@ -484,6 +550,8 @@
     </main>
 
     <%@ include file="footer.jsp" %>
+
+    <script src="${pageContext.request.contextPath}/js/invoice-generator.js"></script>
 </body>
 
 </html>
