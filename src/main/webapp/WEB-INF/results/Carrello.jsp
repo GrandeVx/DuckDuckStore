@@ -147,11 +147,8 @@
                                                             </div>
                                                             <% } %>
                                                     </form>
-
-                                                    <div class="cart-actions">
+													<div class="cart-actions">
                                                         <a href="home" class="btn btn-outline">Continua lo Shopping</a>
-                                                        <button type="button" class="btn btn-outline-primary"
-                                                            onclick="updateCart()">Aggiorna Carrello</button>
                                                     </div>
                                                 </div>
 
@@ -279,13 +276,9 @@
 
                                     function sendUpdateRequest(productID, quantity) {
                                         const xhr = new XMLHttpRequest();
-                                        xhr.open("POST", "cart", true);
+                                        xhr.open("POST", "carrello", true);
                                         xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
                                         xhr.send("action=updateitem&ID=" + productID + "&quantita=" + quantity);
-                                    }
-
-                                    function updateCart() {
-                                        document.getElementById('cartForm').submit();
                                     }
                                 </script>
             </body>
