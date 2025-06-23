@@ -230,8 +230,8 @@ public class CheckoutServlet extends HttpServlet {
 
             // Complete the checkout process with address and payment info
             cart.checkout(utenteLoggato, indirizzo, pagamento);
-
-            // Clear cart and checkout session data
+            
+            // Pulizia Carrello
             session.setAttribute("carrello", new Carrello());
             session.removeAttribute("checkoutAddress");
             session.removeAttribute("checkoutPayment");

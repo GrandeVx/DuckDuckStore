@@ -38,6 +38,10 @@
                                                         class="nav-link">Spooky</a></li>
                                                 <li class="nav-item"><a href="search?category=fantasy"
                                                         class="nav-link">Fantasy</a></li>
+                                                <li class="nav-item"><a href="search?category=professioni"
+                                                    class="nav-link">Profession</a></li>
+                                                <li class="nav-item"><a href="search?category=natale"
+                                                    class="nav-link">Christmas</a></li>
                                             </ul>
                                         </nav>
 
