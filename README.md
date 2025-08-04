@@ -1,8 +1,8 @@
 # 🦆 DuckDuckStore
 
-<p align="center">
+<div align="center" background-color="#f8f9fa" style="padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
   <img src="src/main/webapp/images/logo.png" alt="DuckDuckStore Logo" width="200">
-</p>
+</div>
 
 <p align="center">
   <strong>E-commerce per paperelle di gomma - Progetto TSW 2025</strong>
