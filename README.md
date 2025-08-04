@@ -1,7 +1,7 @@
 # 🦆 DuckDuckStore
 
 <p align="center">
-  <img src="images/logo.png" alt="DuckDuckStore Logo" width="200">
+  <img src="src/main/webapp/images/logo.png" alt="DuckDuckStore Logo" width="200">
 </p>
 
 <p align="center">
